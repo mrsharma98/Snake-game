@@ -1,0 +1,198 @@
+window.onload = function () {
+
+	var BOARD_WIDTH = 480;
+	var BOARD_HEIGHT = 640;
+	var BOARD_BGCOLOR = "#24AE5E";
+
+	var SCORE_BOARD_HEIGHT = 20;
+	var SCORE_BOARD_BGCOLOR = "#c0c96b";
+
+	var TEXT_COLOR = "white";
+	var TEXT_FONT = "bold 16px 'Courier new', monospace";
+
+	var gameBoard = document.getElementById('board');
+	var context = gameBoard.getContext('2d');
+
+	var horizontalMargin = 4;
+	var bottomMarigin = 5;
+
+	var score = 0;
+	var topscore = 0;
+
+	var snakeArray = [];
+	var snakeImage = {};
+	var snakeDirection = "right";
+
+	var server = [];
+	var applePoint = 10;
+
+	var INITIAL_X_CORD = 0;
+	var INITIAL_Y_CORD = 0;
+	var MOVE_PX = 20;
+
+	var isGameOver = false;
+	var i = 0;
+	var tiles = [];
+	document.addEventListener('keydown', (event) => {
+		switch (event.keyCode) {
+			case 38: console.log("UP")
+				snakeDirection = "up";
+				loopSnake();
+				break;
+			case 40: console.log("DOWN")
+				snakeDirection = "down";
+				loopSnake();
+				break;
+			case 37: console.log("LEFT")
+				snakeDirection = "left";
+				loopSnake();
+				break;
+			case 39: console.log("RIGHT")
+				snakeDirection = "right";
+				loopSnake();
+				break;
+			default: break;
+		}
+	}, false);
+	//paintTiles();
+	loadImages();
+	init();
+
+	// function paintTiles() {
+	// 	for (var columns = 0; columns < 20; columns++) {
+	// 		tiles[columns] = [];
+	// 		for (var rows = 0; rows < 15; rows++) {
+	// 			tiles[columns][rows] = 0;
+	// 		}
+	// 	}
+	// }
+
+	function loadImages() {
+		//Snake textures for different parts of snake body
+		snakeImage["headright"] = document.getElementById("headright");
+		snakeImage["headup"] = document.getElementById("headup");
+		snakeImage["headdown"] = document.getElementById("headdown");
+		snakeImage["headleft"] = document.getElementById("headleft");
+		snakeImage["bodyx"] = document.getElementById("bodyx");
+		snakeImage["bodyy"] = document.getElementById("bodyy");
+		snakeImage["corner1"] = document.getElementById("corner1");
+		snakeImage["corner2"] = document.getElementById("corner2");
+		snakeImage["corner3"] = document.getElementById("corner3");
+		snakeImage["corner4"] = document.getElementById("corner4");
+		snakeImage["taildown"] = document.getElementById("taildown");
+		snakeImage["tailup"] = document.getElementById("tailup");
+		snakeImage["tailleft"] = document.getElementById("tailleft");
+		snakeImage["tailright"] = document.getElementById("tailright");
+
+		server.image = document.getElementById("apple");
+	}
+
+	function init() {
+		score = 0;
+		context.clearRect(INITIAL_X_CORD, INITIAL_Y_CORD, BOARD_WIDTH, BOARD_HEIGHT + SCORE_BOARD_HEIGHT);
+		buildSnake();
+		buildServer();
+		drawBoard();
+		//		loopSnake();
+	}
+
+	function buildSnake() {
+		snakeArray = [];
+		snakeArray[0] = { x: 260, y: 400, style: "headright" };
+		snakeArray[1] = { x: 240, y: 400, style: "bodyx" };
+		snakeArray[2] = { x: 220, y: 400, style: "bodyx" };
+		snakeArray[3] = { x: 200, y: 400, style: "tailright" };
+		snakeDirection = "right";
+	}
+
+	function buildServer() {
+		var randomPoint = getRandomPoint();
+		while (isPointOnSnake(randomPoint)) {
+			randomPoint = getRandomPoint();
+		}
+		server.x = randomPoint.x;
+		server.y = randomPoint.y;
+	}
+
+	function getRandomPoint() {
+		var x = Math.floor((Math.random() * (BOARD_WIDTH / MOVE_PX))) * MOVE_PX;
+		var y = Math.floor((Math.random() * (BOARD_HEIGHT / MOVE_PX))) * MOVE_PX;
+		return { x, y };
+	}
+
+	function isPointOnSnake(randomPoint) {
+		for (var i = 0; i < snakeArray.length; i++) {
+			if (snakeArray[i].x === randomPoint.x && snakeArray[i].y === randomPoint.y) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	function drawBoard() {
+		context.fillStyle = BOARD_BGCOLOR;
+		context.fillRect(INITIAL_X_CORD, INITIAL_Y_CORD, BOARD_WIDTH, BOARD_HEIGHT + SCORE_BOARD_HEIGHT);
+
+		context.translate(INITIAL_X_CORD, SCORE_BOARD_HEIGHT);
+		context.translate(INITIAL_X_CORD, -SCORE_BOARD_HEIGHT);
+		context.fillStyle = SCORE_BOARD_BGCOLOR;
+		context.fillRect(INITIAL_X_CORD, INITIAL_Y_CORD, BOARD_WIDTH, SCORE_BOARD_HEIGHT);
+
+		context.fillStyle = TEXT_COLOR;
+		context.font = TEXT_FONT;
+
+		context.textAlign = "right";
+		context.fillText("Top Score : " + topscore, BOARD_WIDTH - horizontalMargin, SCORE_BOARD_HEIGHT - bottomMarigin);
+
+		context.textAlign = "left";
+		context.fillText("Score : " + score, horizontalMargin, SCORE_BOARD_HEIGHT - bottomMarigin);
+
+		context.translate(INITIAL_X_CORD, SCORE_BOARD_HEIGHT);
+
+		//drawSnake
+
+		for (var i = 0; i < snakeArray.length; i++) {
+			context.drawImage(snakeImage[snakeArray[i].style], snakeArray[i].x, snakeArray[i].y);
+		}
+
+
+
+		//drawServer
+		context.drawImage(server.image, server.x, server.y);
+	}
+
+	function loopSnake(event) {
+		console.log(snakeDirection)
+		switch (snakeDirection) {
+			case "right":
+				rebuildSnake(10, 0);
+				drawBoard();
+				break;
+			case "up":
+				rebuildSnake(0, -10);
+				drawBoard();
+				break;
+			case "down":
+				rebuildSnake(0, 10);
+				drawBoard();
+				break;
+			case "left":
+				rebuildSnake(-10, 0);
+				drawBoard();
+				break;
+		}
+	}
+
+	function rebuildSnake(i, j) {
+		snakeArray[0].x += i;
+		snakeArray[1].x += i;
+		snakeArray[2].x += i;
+		snakeArray[3].x += i;
+
+		snakeArray[0].y += j;
+		snakeArray[1].y += j;
+		snakeArray[2].y += j;
+		snakeArray[3].y += j;
+	}
+
+}

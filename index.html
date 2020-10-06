@@ -1,0 +1,75 @@
+<html>
+
+<head>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+  
+</head>
+
+<body>
+	<div style="display:none;">
+		<img id="headright" src="img/headright.png" width="20" height="20">
+		<img id="headup" src="img/headup.png" width="20" height="20">
+		<img id="headdown" src="img/headdown.png" width="20" height="20">
+		<img id="headleft" src="img/headleft.png" width="20" height="20">
+		<img id="bodyx" src="img/bodyx.png" width="20" height="20">
+		<img id="bodyy" src="img/bodyy.png" width="20" height="20">
+		<img id="corner1" src="img/corner1.png" width="20" height="20">
+		<img id="corner2" src="img/corner2.png" width="20" height="20">
+		<img id="corner3" src="img/corner3.png" width="20" height="20">
+		<img id="corner4" src="img/corner4.png" width="20" height="20">
+		<img id="taildown" src="img/taildown.png" width="20" height="20">
+		<img id="tailup" src="img/tailup.png" width="20" height="20">
+		<img id="tailleft" src="img/tailleft.png" width="20" height="20">
+		<img id="tailright" src="img/tailright.png" width="20" height="20">
+		<img id="server" src="img/server.png" width="20" height="20">
+		<img id="obstracle" src="img/apple.png" width="20" height="20">
+	</div>
+	
+	<script src="js/game.js"></script>
+	<script>
+		var topscore = 0;
+	</script>
+	<div class="box" onclick="startgame()">
+		<a class="play-button fa fa-play-circle" href="#popup1" title="Eat many Servers"></a>
+	</div>
+
+	<div id="popup1" class="overlay">
+		<div class="popup">
+
+			<h3>Enjoy Eating Servers</h3>
+			<canvas id="board" height="560" width="680"></canvas>
+			<div class="row social-media">
+				<span class="fa-stack fa-1x">
+					<a id="twitterShare" href="https://twitter.com/home?status=I scored: 300. Could you beat me https://ashvinikumar.github.io/snake-game/"
+						 target="_blank" title="Tweet your score">
+						<i class="fa fa-circle fa-stack-2x"></i>
+						<i class="fa fa-twitter fa-stack-1x fa-inverse" aria-hidden="true"></i>
+					</a>
+				</span>
+				<span class="fa-stack fa-1x">
+					<a href="https://twitter.com/ashvinimaurya" target="_blank" title="Share your score">
+						<i class="fa fa-circle fa-stack-2x"></i>
+						<i class="fa fa-facebook fa-stack-1x fa-inverse" aria-hidden="true"></i>
+					</a>
+				</span>
+				<span class="fa-stack fa-1x">
+					<a href="#" title="Close this window" id="close">
+						<i class="fa fa-circle fa-stack-2x icon-background"></i>
+						<i class="fa fa-times fa-stack-1x fa-inverse" aria-hidden="true"></i>
+					</a>
+				</span>
+			</div>	
+		</div>
+	</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>	
+</body>
+
+</html>

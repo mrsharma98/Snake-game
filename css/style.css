@@ -1,0 +1,114 @@
+.box {
+  width: 40%;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.2);
+  padding: 35px;
+  border: 2px solid #fff;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+  text-align: center;
+}
+
+.button {
+  font-size: 1em;
+  padding: 10px;
+  color: #fff;
+  border: 2px solid #06D85F;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.button:hover {
+  background: #06D85F;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #C2C96A;
+  position: relative;
+  transition: all 5s ease-in-out;
+  width: 680px;
+  height: 488px;
+  margin-top: 5px;
+}
+
+canvas {
+  display: table;
+  margin-left: -20px;
+}
+
+.social-media {
+  display:block;
+  text-align:center;
+}
+
+
+.popup .social-media {
+  position: absolute;
+  top: 20px;
+  right: 70px;
+  text-decoration: none;
+  color: #333;
+}
+
+.popup h3 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+  text-align: center;
+}
+
+.icon-background {
+  color: red;
+}
+
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+
+
+.play-button {
+  margin-top: 70px;
+  font-size:150px;
+  color:red;
+  text-decoration:none;
+}
+
+.play-button:hover {
+  position: relative;
+  color: red;
+  font-size: 200px;
+  text-decoration: none;
+}
